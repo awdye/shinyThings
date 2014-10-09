@@ -1,5 +1,5 @@
 #setwd ("C:/shiny/pc1scores")
-#library(dplR)
+library(dplR)
 
 # Define server logic required to draw a chron_plot
 shinyServer(function(input, output) {
@@ -10,6 +10,10 @@ shinyServer(function(input, output) {
   pc1_score = pc1_scores$PC1_score
   spline_15 = pc1_scores$spline_15
   total_sd = pc1_scores$total_sd
+  
+  #create an action button for spline stiffness
+  pc1_spl = ffcsaps(pc1_scores$PC1_score, pc1_scores$year, nyrs= input$button1) #alex- not sure if button1 is right also do we 
+  need to define range of values: 5, 12, 25, 51, 101 would be ideal, or user inputs?
   
   output$chron_plot <- renderPlot({
     paste("you have selected", input$slider1)
